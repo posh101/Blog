@@ -8,16 +8,22 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const post = {};
+const posts = {};
 
 app.get('/post', (req, res) => {
 
 });
 
 app.post('/post', (req, res) => {
+  const id = randomBytes(4).toString('hex')
   const { title } = req.body
 
-  const id = randomBytes(4).toString('hex')
+  posts[id] = {
+    id, 
+    title
+  }
+
+  res.status(201).send(posts[id])
 });
 
 app.listen(4000, () => {
