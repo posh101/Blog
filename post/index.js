@@ -11,7 +11,7 @@ app.use(express.json());
 const posts = {};
 
 app.get('/post', (req, res) => {
-
+ res.send(posts)
 });
 
 app.post('/post', (req, res) => {
