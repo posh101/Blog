@@ -1,8 +1,12 @@
 import React from 'react'
+import PostCreate from './PostCreate'
 
 function App() {
   return (
-    <div>App</div>
+    <div className='container'>
+      <h1>Create post</h1>
+      <PostCreate/>
+    </div>
   )
 }
 
