@@ -17,19 +17,19 @@ useEffect(() => {
 }, []);
 console.log(posts)
 
-// const renderedPost = Object.value(posts).map(post => {
-//     return <div className='card' style={{ width: '30%',marginBottom: '20px' }}>
-//         key={post.id}
-//         <div className='card-body'>
-//             <h3>{post.title}</h3>
-//         </div>
-//     </div>
-// })
+const renderedPost = Object.values(posts).map(post => {
+    return <div className='card' style={{ width: '30%',marginBottom: '20px' }}>
+        key={post.id}
+        <div className='card-body'>
+            <h3>{post.title}</h3>
+        </div>
+    </div>
+})
 
 
   return (
     <div className='d-flex flex-row flex-wrap justify-content-between'>
-   
+        {renderedPost}
     </div>
   )
 }
