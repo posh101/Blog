@@ -5,7 +5,7 @@ import axios from 'axios'
 function PostCreate() {
   const [title, setTitle] = useState('')
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =  async(e) => {
     e.preventDefault()
     
     await axios.post('http://localhost:4000/post', {
