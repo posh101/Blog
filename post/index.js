@@ -26,7 +26,7 @@ app.post('/post', async(req, res) => {
     title
   }
 
-  await fetch('http://locahhost:4005', {
+  await axios.post('http://locahhost:4005', {
     method: 'POST',
     type: "PostCreated",
     data: {

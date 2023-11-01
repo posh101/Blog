@@ -5,8 +5,8 @@ import axios from 'axios'
 function PostCreate() {
   const [title, setTitle] = useState('')
 
-  const handleSubmit =  async(e) => {
-    e.preventDefault()
+  const onSubmit =  async(event) => {
+    event.preventDefault()
     
     await axios.post('http://localhost:4000/post', {
       title
@@ -17,7 +17,7 @@ function PostCreate() {
 
   return (
     <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
             <div className='form-group'>
             <label>Title</label>
             <input value={title} onChange={e => setTitle(e.target.value)} className='form-control'/>

@@ -16,7 +16,7 @@ const PostList = () => {
     fetchPosts();
   }, []);
 
-  const renderedPosts = Object.values(posts).map((post) => {
+  const renderedPosts = Object.keys(posts).map((post) => {
     return (
       <div
         className="card"
