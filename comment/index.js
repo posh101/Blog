@@ -14,29 +14,25 @@ app.get('/post/:id/comments', (req, res) => {
 })
 
 app.post('/post/:id/comments', async (req, res) => {
+
  const commentId = randomBytes(4).toString('hex')
- const {contents} = req.body
+ const {content} = req.body
  const comments = commentsByPostId[req.params.id] || []
- comments.push({id: commentId, contents})
+ comments.push({id: commentId, content})
 
  commentsByPostId[req.params.id] = comments
 
- await fetch('http://localhost:4005/events', {
-  method: 'POST',
-  type: 'PostCreated',
+ await axios.post('http://localhost:4005/events', {
+  type: "CommentCreated",
   data: {
     id: commentId,
-    contents,
-    comment: req.params.id
+    content,
+    postId: req.params.id
   }
  })
 
  res.status(201).send(comments)
 
-})
-
-app.post('/events', ()=> {
-  console.log('Event Recieved', req.body.type)
 })
 
 app.listen(4001, () => {

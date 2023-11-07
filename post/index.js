@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const axios = require('axios');
 const {randomBytes} = require('crypto')
 const morgan = require('morgan')
 
@@ -12,12 +11,12 @@ app.use(express.json());
 
 const posts = {};
 
-app.get('/post', (req, res) => {
+app.get('/posts', (req, res) => {
  res.send(posts)
 });
 
-app.post('/post', async(req, res) => {
- try {
+app.post('/posts', async(req, res) => {
+
   const id = randomBytes(4).toString('hex')
   const { title } = req.body
 
@@ -26,20 +25,17 @@ app.post('/post', async(req, res) => {
     title
   }
 
-  await axios.post('http://locahhost:4005', {
-    method: 'POST',
-    type: "PostCreated",
-    data: {
-      id,
-      title
-    }
-  })
+  await axios.post('http://localhost:4005/events', {
+  method: "POST",
+  type: "PostCreated",
+  data: {
+    id, title
+  }
+})
 
   res.status(201).send(posts[id])
+  console.log(posts)
 
- }catch(error) {
-  console.log(error.msg)
- }
 });
 
 app.listen(4000, () => {
