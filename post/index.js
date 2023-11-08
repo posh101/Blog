@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const {randomBytes} = require('crypto')
 const morgan = require('morgan')
+const axios = require('axios')
 
 const app = express();
 
@@ -24,17 +25,26 @@ app.post('/posts', async(req, res) => {
     id, 
     title
   }
-
+try {
+  
   await axios.post('http://localhost:4005/events', {
-  method: "POST",
   type: "PostCreated",
   data: {
     id, title
   }
 })
+}catch(error) {
+  console.log(error.message)
+}
+
+app.post('/events', (req, res) => {
+  console.log('event recieved:', req.body.type)
+
+  res.send({})
+})
 
   res.status(201).send(posts[id])
-  console.log(posts)
+
 
 });
 
