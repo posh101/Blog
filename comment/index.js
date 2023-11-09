@@ -14,7 +14,7 @@ app.get('/post/:id/comments', (req, res) => {
   res.send(commentsByPostId[req.params.id])
 })
 
-app.post('/post/:id/comments', async (req, res) => {
+app.post('/posts/:id/comments', async (req, res) => {
 
  const commentId = randomBytes(4).toString('hex')
  const {content} = req.body
@@ -44,8 +44,11 @@ app.post('/post/:id/comments', async (req, res) => {
 
 app.post('/events', async(req, res) => {
   console.log('event recieved:', req.body.type)
+    
+  const {type, date} = req.body
 
-  const {postId, id, status, content} = req.body
+  if(type === 'CommentModerated') {
+    const {postId, id, status, content} = req.body
 
   const comments = commentsByPostId
 
@@ -67,6 +70,7 @@ app.post('/events', async(req, res) => {
     })
   }catch(err) {
     console.log(err.msg)
+  }
   }
 
   res.send({})

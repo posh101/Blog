@@ -9,7 +9,11 @@ app.use(express.json())
 
 app.post('/events', async(req, res) => {
 
+    const events = []
+
     const {event} = req.body
+
+    events.push(event)
 
        try {
         await axios.post('http://localhost:4000/events', event)
@@ -36,6 +40,10 @@ app.post('/events', async(req, res) => {
         }
         
     res.send({status: "Ok"})
+})
+
+app.get('/events', (req, res) => {
+    res.send(events)
 })
 
 

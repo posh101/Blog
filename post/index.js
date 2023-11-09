@@ -7,7 +7,7 @@ const axios = require('axios')
 const app = express();
 
 app.use(cors());
-app.use(morgan('tiny'))
+app.use(morgan('combined'))
 app.use(express.json());
 
 const posts = {};
